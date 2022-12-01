@@ -57,7 +57,7 @@ def main():
     class2Cov = [[0.8, 1.0], [1.5, 1.1]]
     class2N   = 20000
 
-    testN = 100
+    testN = 10000
 #training data
     class1Data = np.transpose(np.random.multivariate_normal(class1Mu, class1Cov, class1N))
     class2Data = np.transpose(np.random.multivariate_normal(class2Mu, class2Cov, class2N))
@@ -124,8 +124,8 @@ def main():
         ax[-1].tick_params(which="major", width=3, length=10)
         ax[-1].tick_params(which="minor", width=2, length=6)
  
-    ax[0].scatter(*class1Data, marker="o", s=40.0, color="orange", alpha=0.2, edgecolors="none")
-    ax[0].scatter(*class2Data, marker="o", s=40.0, color="green",  alpha=0.2, edgecolors="none")
+    ax[0].scatter(*class1Data, marker="o", s=40.0,  color="red",  alpha=0.2, edgecolors="none")
+    ax[0].scatter(*class2Data, marker="o", s=40.0,  color="blue", alpha=0.2, edgecolors="none")
     ax[0].scatter(*testData,   marker="*", s=600.0, color="black", edgecolors="none")
     ax[0].set_title("Generated Training Data", fontsize=48, y=1.03)
     ax[0].set_xlabel("feature x", fontsize=40)
@@ -133,9 +133,9 @@ def main():
     ax[0].set_xlim(*rangeX)
     ax[0].set_ylim(*rangeY)
 
-    ax[1].hist(class1Data[1], bins=binN, range=rangeY, histtype='step', color='orange', linewidth=4,\
+    ax[1].hist(class1Data[1], bins=binN, range=rangeY, histtype='step', color='red',  linewidth=4,\
                density=True, orientation='horizontal')
-    ax[1].hist(class2Data[1], bins=binN, range=rangeY, histtype='step', color='green', linewidth=4,\
+    ax[1].hist(class2Data[1], bins=binN, range=rangeY, histtype='step', color='blue', linewidth=4,\
                density=True, orientation='horizontal')
     ax[1].set_title("Feature Y Projection", fontsize=48, y=1.03)
     ax[1].set_xlabel('count', fontsize=40)
@@ -143,8 +143,8 @@ def main():
     ax[1].set_xlim(left=0.0)
     ax[1].set_ylim(*rangeY)
 
-    ax[2].plot(projX, class1XHist, drawstyle="steps-post", color='orange', linewidth=4)
-    ax[2].plot(projX, class2XHist, drawstyle="steps-post", color='green',  linewidth=4)
+    ax[2].plot(projX, class1XHist, drawstyle="steps-post", color='red',  linewidth=4)
+    ax[2].plot(projX, class2XHist, drawstyle="steps-post", color='blue', linewidth=4)
     ax[2].set_title("Feature X Projection", fontsize=48, y=1.03)
     ax[2].set_xlabel('feature x', fontsize=40)
     ax[2].set_ylabel('count', fontsize=40)
@@ -152,15 +152,15 @@ def main():
     ax[2].invert_yaxis()
     ax[2].set_ylim(top=0)
 
-    plot0 = ax[3].scatter(*testAmbiguous, marker="*", s=600.0, color="grey",   edgecolors="none")
-    plot1 = ax[3].scatter(*testClass1,    marker="*", s=600.0, color="orange", edgecolors="none")
-    plot2 = ax[3].scatter(*testClass2,    marker="*", s=600.0, color="green",  edgecolors="none")
+    plot0 = ax[3].scatter(*testAmbiguous, marker="*", s=600.0, color="grey", edgecolors="none")
+    plot1 = ax[3].scatter(*testClass1,    marker="*", s=600.0, color="red",  edgecolors="none")
+    plot2 = ax[3].scatter(*testClass2,    marker="*", s=600.0, color="blue", edgecolors="none")
     ax[3].set_title("Test Data Classification", fontsize=48, y=1.03)
     ax[3].set_xlabel("feature x", fontsize=40) 
     ax[3].set_ylabel("feature y", fontsize=40)
     ax[3].set_xlim(*rangeX)
     ax[3].set_ylim(*rangeY)
-    legObj = ax[3].legend([plot0, plot1, plot2], ["ambiguous", "class as orange", "class as green"],\
+    legObj = ax[3].legend([plot0, plot1, plot2], ["ambiguous", "class as red", "class as blue"],\
                           loc="upper right", fontsize=24)
 #save plots
     exepath = os.path.dirname(os.path.abspath(__file__))
